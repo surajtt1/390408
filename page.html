@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page {{ .PageNum }}</title>
+</head>
+<body>
+    <h1>Page {{ .PageNum }} of {{ .TotalPages }}</h1>
+    <ul>
+        {{ range .Items }}
+            <li>ID: {{ .ID }}, Name: {{ .Name }}, Value: {{ .Value }}</li>
+        {{ end }}
+    </ul>
+    <nav>
+        <ul>
+            <li><a href="/page/{{ if eq .PageNum 1 }}1{{ else }}{{ sub .PageNum 1 }}{{ end }}">Previous</a></li>
+            <li><a href="/page/{{ if eq .PageNum .TotalPages }}{{ .TotalPages }}{{ else }}{{ add .PageNum 1 }}{{ end }}">Next</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
